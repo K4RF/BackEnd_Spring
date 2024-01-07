@@ -1,5 +1,0 @@
-Iname = appConfigobject  = hello.core.AppConfig$$SpringCGLIB$$0@7df587ef
-Lname = memberServiceobject  = hello.core.member.MemberServiceImpl@3591009c
-Tname = memberRepositoryobject  = hello.core.member.MemoryMemberRepository@5398edd0
-Hname = orderServiceobject  = hello.core.order.OrderServiceImpl@b5cc23a
-Oname = discountPolicyobject  = hello.core.dicount.RateDiscountPolicy@5cc5b667
