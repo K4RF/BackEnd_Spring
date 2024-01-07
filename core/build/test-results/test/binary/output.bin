@@ -1,0 +1,3 @@
+Skey = memberRepository1 value = hello.core.member.MemoryMemberRepository@11389053
+Skey = memberRepository2 value = hello.core.member.MemoryMemberRepository@5fe8b721
+šbeansOfType = {memberRepository1=hello.core.member.MemoryMemberRepository@11389053, memberRepository2=hello.core.member.MemoryMemberRepository@5fe8b721}
