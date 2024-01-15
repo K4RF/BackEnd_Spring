@@ -9,9 +9,9 @@ import hello.core.member.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
 public class OrderServiceImpl implements  OrderService{
-    private final MemberRepository memberRepository;
+    private  MemberRepository memberRepository;
 
-    private final DiscountPolicy discountPolicy;
+    private  DiscountPolicy discountPolicy;
     //private final RateDiscountPolicy rateDiscountPolicy = new RateDiscountPolicy();
 
 
@@ -21,11 +21,8 @@ public class OrderServiceImpl implements  OrderService{
     }
 
     @Autowired
-    public void setMemberRepository(MemberRepository memberRepository) {
+    public void init(MemberRepository memberRepository, DiscountPolicy discountPolicy){
         this.memberRepository = memberRepository;
-    }
-    @Autowired
-    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
         this.discountPolicy = discountPolicy;
     }
 
