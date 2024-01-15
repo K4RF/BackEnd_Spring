@@ -1,0 +1,3 @@
+call AppConfig.memberService
+!call AppConfig.memberRepository
+call AppConfig.orderService
