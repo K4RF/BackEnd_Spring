@@ -10,16 +10,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class OrderServiceImpl implements  OrderService{
 
-    private final MemberRepository memberRepository;
-    private final DiscountPolicy discountPolicy;
+    private  MemberRepository memberRepository;
+    private  DiscountPolicy discountPolicy;
     //private final RateDiscountPolicy rateDiscountPolicy = new RateDiscountPolicy();
 
 
     @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        System.out.println("memberRepository = " + memberRepository);
-        System.out.println("discountPolicy = " + discountPolicy);
+        System.out.println("1. OrderServiceImpl.OrderServiceImpl");
         this.memberRepository = memberRepository;
+        this.discountPolicy = discountPolicy;
+    }
+    @Autowired
+    public void setMemberRepository(MemberRepository memberRepository) {
+        System.out.println("memberRepository = " + memberRepository);
+        this.memberRepository = memberRepository;
+    }
+
+    public void setDiscountPolicy(DiscountPolicy discountPolicy) {
+        System.out.println("discountPolicy = " + discountPolicy);
         this.discountPolicy = discountPolicy;
     }
 
