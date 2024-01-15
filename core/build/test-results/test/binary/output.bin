@@ -1,3 +1,2 @@
-call AppConfig.memberService
-!call AppConfig.memberRepository
-call AppConfig.orderService
+noBean2 = null
+noBean3 = Optional.empty
