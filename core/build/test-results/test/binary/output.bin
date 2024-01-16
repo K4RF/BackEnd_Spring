@@ -1,0 +1,2 @@
+’policyMap = {fixDiscountPolicy=hello.core.dicount.FixDiscountPolicy@76318a7d, rateDiscountPolicy=hello.core.dicount.RateDiscountPolicy@2a492f2a}
+lpolicies = [hello.core.dicount.FixDiscountPolicy@76318a7d, hello.core.dicount.RateDiscountPolicy@2a492f2a]
