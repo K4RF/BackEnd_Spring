@@ -1,6 +1,1 @@
-find prototypeBean1
-PrototypeBean.init
-find prototypeBean2
-PrototypeBean.init
-HprototypeBean1 = hello.core.scope.PrototypeTest$PrototypeBean@2e54db99
-HprototypeBean2 = hello.core.scope.PrototypeTest$PrototypeBean@55e8ec2f
+ZPrototypeBean,init = hello.core.scope.SingletonWithPrototypeTest1$PrototypeBean@78a287ed
