@@ -1,6 +1,1 @@
-생성자 호출, url = null
-NetworkClient.init
-#connect: https://hello-spring.dev
-Dcall: https://hello-spring.devmessage = 초기화 연결 메시지
-NetworkClient.close
-close 
+ZPrototypeBean,init = hello.core.scope.SingletonWithPrototypeTest1$PrototypeBean@78a287ed
