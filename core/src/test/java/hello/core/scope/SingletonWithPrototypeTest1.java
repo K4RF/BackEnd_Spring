@@ -1,14 +1,13 @@
 package hello.core.scope;
 
-import ch.qos.logback.core.net.server.Client;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.PreDestroy;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Scope;
+
+import jakarta.inject.Provider;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -45,23 +44,21 @@ public class SingletonWithPrototypeTest1 {
          */
 
         @Autowired
-        private ObjectProvider<PrototypeBean> prototypeBeanProvider;
+        private Provider<PrototypeBean> prototypeBeanProvider;
 
         public int logic(){
-            PrototypeBean prototypeBean = prototypeBeanProvider.getObject();
+            PrototypeBean prototypeBean = prototypeBeanProvider.get();
             prototypeBean.addCount();
             int count = prototypeBean.getCount();
             return count;
         }
-        // private final PrototypeBean prototypeBean;      // 생성 시점에 주입
-
-
-        /*@Autowired
+        /* 생성 시점에 주입
+        // private final PrototypeBean prototypeBean;
+        @Autowired
         public ClientBean(PrototypeBean prototypeBean){
             this.prototypeBean = prototypeBean;
 
         }
-
          */
     }
 
