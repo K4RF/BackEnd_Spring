@@ -19,6 +19,8 @@ public class RequestHeaderServlet extends HttpServlet {
         printStartLine(request);
         printHeaders(request);
         printHeaderUtils(request);
+        printEtc(request);
+        response.getWriter().write("ok");
     }
 
     private static void printStartLine(HttpServletRequest request) {
