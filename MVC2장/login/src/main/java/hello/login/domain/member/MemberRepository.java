@@ -2,8 +2,6 @@ package hello.login.domain.member;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
-
-import javax.swing.text.html.Option;
 import java.util.*;
 
 @Slf4j
