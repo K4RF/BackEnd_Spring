@@ -1,0 +1,12 @@
+D15:55:00.440 [Test worker] DEBUG o.s.j.d.DriverManagerDataSource --
+`                Creating new JDBC DriverManager Connection to [jdbc:h2:tcp://localhost/~/test]
+G15:55:00.569 [Test worker] INFO  h.j.e.t.ExTranslatorV1Test$Service --
+                saveId=myId
+D15:55:00.572 [Test worker] DEBUG o.s.j.d.DriverManagerDataSource --
+`                Creating new JDBC DriverManager Connection to [jdbc:h2:tcp://localhost/~/test]
+G15:55:00.603 [Test worker] INFO  h.j.e.t.ExTranslatorV1Test$Service --
++                키 중복, 복구 시도
+G15:55:00.608 [Test worker] INFO  h.j.e.t.ExTranslatorV1Test$Service --
+"                retryId=myId6522
+D15:55:00.608 [Test worker] DEBUG o.s.j.d.DriverManagerDataSource --
+`                Creating new JDBC DriverManager Connection to [jdbc:h2:tcp://localhost/~/test]
