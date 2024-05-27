@@ -1,9 +1,11 @@
 package hello.jdbc.service;
-
-import hello.jdbc.Repository.MemberRepositoryV3;
+import hello.jdbc.Repository.MemberRepository;
 import hello.jdbc.Repository.MemberRepositoryV4_1;
+import hello.jdbc.Repository.MemberRepositoryV4_2;
+import hello.jdbc.Repository.MemberRepositoryV5;
 import hello.jdbc.domain.Member;
 import lombok.extern.slf4j.Slf4j;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -12,16 +14,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-
 import javax.sql.DataSource;
 import java.sql.SQLException;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-
 /**
  * 예외 누수 문제 해결
  * SQLException 제거
+ *
  * MemberRepository 인터페이스 의존
  */
 @Slf4j
@@ -31,7 +31,7 @@ class MemberServiceV4Test {
     public static final String MEMBER_B = "memberB";
     public static final String MEMBER_EX = "ex";
     @Autowired
-    MemberRepositoryV4_1 memberRepository;
+    MemberRepository memberRepository;
     @Autowired
     MemberServiceV4 memberService;
     @AfterEach
@@ -47,25 +47,26 @@ class MemberServiceV4Test {
             this.dataSource = dataSource;
         }
         @Bean
-        MemberRepositoryV4_1 memberRepositoryV4_1() {
-            return new MemberRepositoryV4_1(dataSource);
+        MemberRepository memberRepository() {
+//return new MemberRepositoryV4_1(dataSource); //단순 예외 변환
+//            return new MemberRepositoryV4_2(dataSource); //스프링 예외 변환
+            return new MemberRepositoryV5(dataSource);
         }
         @Bean
         MemberServiceV4 memberServiceV4() {
-            return new MemberServiceV4(memberRepositoryV4_1());
+            return new MemberServiceV4(memberRepository());
         }
     }
     @Test
     void AopCheck() {
         log.info("memberService class={}", memberService.getClass());
         log.info("memberRepository class={}", memberRepository.getClass());
-        assertThat(AopUtils.isAopProxy(memberService)).isTrue();
-        assertThat(AopUtils.isAopProxy(memberRepository)).isFalse();
+        Assertions.assertThat(AopUtils.isAopProxy(memberService)).isTrue();
+        Assertions.assertThat(AopUtils.isAopProxy(memberRepository)).isFalse();
     }
-
     @Test
     @DisplayName("정상 이체")
-    void accountTransfer() throws SQLException {
+    void accountTransfer() {
 //given
         Member memberA = new Member(MEMBER_A, 10000);
         Member memberB = new Member(MEMBER_B, 10000);
@@ -82,7 +83,7 @@ class MemberServiceV4Test {
     }
     @Test
     @DisplayName("이체중 예외 발생")
-    void accountTransferEx() throws SQLException {
+    void accountTransferEx() {
 //given
         Member memberA = new Member(MEMBER_A, 10000);
         Member memberEx = new Member(MEMBER_EX, 10000);
