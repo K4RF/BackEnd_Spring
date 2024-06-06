@@ -27,6 +27,8 @@ dependencies {
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	//MyBatis 스프링 부트 3.0 추가
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3'
 	//JdbcTemplate 추가
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	//H2 데이터베이스 추가
