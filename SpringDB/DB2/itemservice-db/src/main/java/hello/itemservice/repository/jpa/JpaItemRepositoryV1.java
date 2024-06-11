@@ -7,7 +7,9 @@ import hello.itemservice.repository.ItemUpdateDto;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
 import java.util.List;
@@ -15,9 +17,11 @@ import java.util.Optional;
 
 @Slf4j
 @Repository
+@Transactional
 public class JpaItemRepositoryV1 implements ItemRepository {
     private final EntityManager em;
 
+    @Autowired
     public JpaItemRepositoryV1(EntityManager em) {
         this.em = em;
     }
