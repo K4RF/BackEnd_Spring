@@ -15,12 +15,12 @@ import javax.sql.DataSource;
 
 @Slf4j
 @SpringBootTest
-public class BasicTxTest{
+public class BasicTxTest {
     @Autowired
     PlatformTransactionManager txManger;
 
     @TestConfiguration
-    static class Config{
+    static class Config {
         @Bean
         public PlatformTransactionManager transactionManager(DataSource dataSource) {
             return new DataSourceTransactionManager(dataSource);
@@ -28,7 +28,7 @@ public class BasicTxTest{
     }
 
     @Test
-    void commit(){
+    void commit() {
         log.info("트랜잭션 시작");
         TransactionStatus status = txManger.getTransaction(new DefaultTransactionDefinition());
 
@@ -38,12 +38,40 @@ public class BasicTxTest{
     }
 
     @Test
-    void rollback(){
+    void rollback() {
         log.info("트랜잭션 시작");
         TransactionStatus status = txManger.getTransaction(new DefaultTransactionDefinition());
 
         log.info("트랜잭션 롤백 시점");
         txManger.rollback(status);
         log.info("트랜잭션 롤백 완료");
+    }
+
+    @Test
+    void double_commit() {
+        log.info("트랜잭션 시작");
+        TransactionStatus tx1 = txManger.getTransaction(new DefaultTransactionDefinition());
+
+        log.info("트랜잭션1 커밋");
+        txManger.commit(tx1);
+
+        log.info("트랜잭션2 커밋");
+        TransactionStatus tx2 = txManger.getTransaction(new DefaultTransactionDefinition());
+        txManger.commit(tx2);
+        log.info("트랜잭션 커밋 완료");
+    }
+
+    @Test
+    void double_commit_rollback() {
+        log.info("트랜잭션1 시작");
+        TransactionStatus tx1 = txManger.getTransaction(new DefaultTransactionDefinition());
+        log.info("트랜잭션1 커밋");
+        txManger.commit(tx1);
+
+        log.info("트랜잭션2 시작");
+        TransactionStatus tx2 = txManger.getTransaction(new DefaultTransactionDefinition());
+        log.info("트랜잭션 롤백");
+        txManger.rollback(tx2);
+
     }
 }
