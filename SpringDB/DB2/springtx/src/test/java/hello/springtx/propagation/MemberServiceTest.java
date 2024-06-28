@@ -10,115 +10,145 @@ import org.springframework.transaction.UnexpectedRollbackException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
+
 @Slf4j
 @SpringBootTest
 class MemberServiceTest {
 
     @Autowired
     MemberService memberService;
-
     @Autowired
     MemberRepository memberRepository;
-
     @Autowired
     LogRepository logRepository;
 
     /**
-     * memberService    @Transactional: OFF
-     * memberRepository @Transactional: ON
-     * logRepository    @Transactional: ON
+     * memberService    @Transactional:OFF
+     * memberRepository @Transactional:ON
+     * logRepository    @Transactional:ON
      */
     @Test
-    void outerTxOff_success(){
-        // given
+    void outerTxOff_success() {
+        //given
         String username = "outerTxOff_success";
-        // when
+
+        //when
         memberService.joinV1(username);
-        //then
+
+        //when: 모든 데이터가 정상 저장된다.
         assertTrue(memberRepository.find(username).isPresent());
         assertTrue(logRepository.find(username).isPresent());
     }
 
     /**
-     * MemberService @Transactional:OFF
-     * MemberRepository @Transactional:ON
-     * LogRepository @Transactional:ON Exception
+     * memberService    @Transactional:OFF
+     * memberRepository @Transactional:ON
+     * logRepository    @Transactional:ON Exception
      */
     @Test
     void outerTxOff_fail() {
-    //given
+        //given
         String username = "로그예외_outerTxOff_fail";
-    //when
+
+        //when
         assertThatThrownBy(() -> memberService.joinV1(username))
                 .isInstanceOf(RuntimeException.class);
-    // then: 완전히 롤백되지 않고, member 데이터가 남아서 저장된다.
+
+        //when: log 데이터는 롤백된다.
         assertTrue(memberRepository.find(username).isPresent());
         assertTrue(logRepository.find(username).isEmpty());
     }
 
+
     /**
-     * MemberService @Transactional:ON
-     * MemberRepository @Transactional:OFF
-     * LogRepository @Transactional:OFF
+     * memberService    @Transactional:ON
+     * memberRepository @Transactional:OFF
+     * logRepository    @Transactional:OFF
      */
     @Test
     void singleTx() {
-    //given
+        //given
         String username = "singleTx";
-    //when
+
+        //when
         memberService.joinV1(username);
-        //then: 모든 데이터가 정상 저장된다.
+
+        //when: 모든 데이터가 정상 저장된다.
         assertTrue(memberRepository.find(username).isPresent());
         assertTrue(logRepository.find(username).isPresent());
     }
 
     /**
-     * MemberService @Transactional:ON
-     * MemberRepository @Transactional:ON
-     * LogRepository @Transactional:ON
+     * memberService    @Transactional:ON
+     * memberRepository @Transactional:ON
+     * logRepository    @Transactional:ON
      */
     @Test
     void outerTxOn_success() {
-//given
+        //given
         String username = "outerTxOn_success";
-//when
+
+        //when
         memberService.joinV1(username);
-//then: 모든 데이터가 정상 저장된다.
+
+        //when: 모든 데이터가 정상 저장된다.
         assertTrue(memberRepository.find(username).isPresent());
         assertTrue(logRepository.find(username).isPresent());
     }
 
     /**
-     * MemberService @Transactional:ON
-     * MemberRepository @Transactional:ON
-     * LogRepository @Transactional:ON Exception
+     * memberService    @Transactional:ON
+     * memberRepository @Transactional:ON
+     * logRepository    @Transactional:ON Exception
      */
     @Test
     void outerTxOn_fail() {
-//given
+        //given
         String username = "로그예외_outerTxOn_fail";
-//when
+
+        //when
         assertThatThrownBy(() -> memberService.joinV1(username))
                 .isInstanceOf(RuntimeException.class);
-//then: 모든 데이터가 롤백된다.
+
+        //when: 모든 데이터가 롤백된다.
         assertTrue(memberRepository.find(username).isEmpty());
         assertTrue(logRepository.find(username).isEmpty());
     }
 
     /**
-     * MemberService @Transactional:ON
-     * MemberRepository @Transactional:ON
-     * LogRepository @Transactional:ON Exception
+     * memberService    @Transactional:ON
+     * memberRepository @Transactional:ON
+     * logRepository    @Transactional:ON Exception
      */
     @Test
     void recoverException_fail() {
-//given
+        //given
         String username = "로그예외_recoverException_fail";
-//when
-        assertThatThrownBy(() -> memberService.joinV2(username)) // 예외만 롤백 되는게 아니라 전체 롤백됨
+
+        //when
+        assertThatThrownBy(() -> memberService.joinV2(username))
                 .isInstanceOf(UnexpectedRollbackException.class);
-//then: 모든 데이터가 롤백된다.
+
+        //when: 모든 데이터가 롤백된다.
         assertTrue(memberRepository.find(username).isEmpty());
+        assertTrue(logRepository.find(username).isEmpty());
+    }
+
+    /**
+     * memberService    @Transactional:ON
+     * memberRepository @Transactional:ON
+     * logRepository    @Transactional:ON(REQUIRES_NEW) Exception
+     */
+    @Test
+    void recoverException_success() {
+        //given
+        String username = "로그예외_recoverException_success";
+
+        //when
+        memberService.joinV2(username);
+
+        //when: member 저장, log 롤백
+        assertTrue(memberRepository.find(username).isPresent());
         assertTrue(logRepository.find(username).isEmpty());
     }
 }
