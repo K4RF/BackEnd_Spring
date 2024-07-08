@@ -7,7 +7,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor
 public class OrderServiceV5 {
     private final OrderRepositoryV5 orderRepository;
     private final TraceTemplate template;
@@ -15,7 +14,6 @@ public class OrderServiceV5 {
         this.orderRepository = orderRepository;
         this.template = new TraceTemplate(trace);
     }
-
     public void orderItem(String itemId) {
         template.execute("OrderService.orderItem()", () -> {
             orderRepository.save(itemId);

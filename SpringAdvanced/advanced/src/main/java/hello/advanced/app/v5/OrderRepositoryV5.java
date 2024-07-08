@@ -8,13 +8,11 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-@RequiredArgsConstructor
 public class OrderRepositoryV5 {
     private final TraceTemplate template;
     public OrderRepositoryV5(LogTrace trace) {
         this.template = new TraceTemplate(trace);
     }
-
     public void save(String itemId) {
         template.execute("OrderRepository.save()", () -> {
 //저장 로직
