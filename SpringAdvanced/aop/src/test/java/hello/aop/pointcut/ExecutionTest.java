@@ -109,7 +109,7 @@ public class ExecutionTest {
         Method internalMethod = MemberServiceImpl.class.getMethod("internal", String.class);
         assertThat(pointcut.matches(internalMethod, MemberServiceImpl.class)).isFalse();
     }
-    
+
     //String 타입의 파라미터 허용
     //(String)
     @Test
