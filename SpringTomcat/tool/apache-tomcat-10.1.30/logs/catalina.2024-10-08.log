@@ -129,3 +129,9 @@
 08-Oct-2024 15:29:43.634 INFO [main] org.apache.catalina.startup.HostConfig.deployWAR 웹 애플리케이션 아카이브 [C:\Code\BackEnd_Spring\SpringTomcat\tool\apache-tomcat-10.1.30\webapps\ROOT.war]의 배치가 [1,314] 밀리초에 완료되었습니다.
 08-Oct-2024 15:29:43.650 INFO [main] org.apache.coyote.AbstractProtocol.start 프로토콜 핸들러 ["http-nio-8080"]을(를) 시작합니다.
 08-Oct-2024 15:29:43.769 INFO [main] org.apache.catalina.startup.Catalina.start 서버가 [1691] 밀리초 내에 시작되었습니다.
+08-Oct-2024 15:48:53.410 WARNING [main] org.apache.catalina.core.StandardServer.await 유효하지 않은 셧다운 명령 []을(를) 받았습니다.
+08-Oct-2024 15:49:06.303 INFO [main] org.apache.catalina.core.StandardServer.await 셧다운 포트를 통해 유효한 셧다운 명령을 받았습니다. 서버 인스턴스를 중지시킵니다.
+08-Oct-2024 15:49:06.304 INFO [main] org.apache.coyote.AbstractProtocol.pause 프로토콜 핸들러 ["http-nio-8080"]을(를) 일시 정지 중
+08-Oct-2024 15:49:06.383 INFO [main] org.apache.catalina.core.StandardService.stopInternal 서비스 [Catalina]을(를) 중지시킵니다.
+08-Oct-2024 15:49:06.394 INFO [main] org.apache.coyote.AbstractProtocol.stop 프로토콜 핸들러 ["http-nio-8080"]을(를) 중지시킵니다.
+08-Oct-2024 15:49:06.405 INFO [main] org.apache.coyote.AbstractProtocol.destroy 프로토콜 핸들러 ["http-nio-8080"]을(를) 소멸시킵니다.
