@@ -12,9 +12,9 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.sql.DataSource;
 
 @Slf4j
-@Configuration
+//@Configuration
 public class DbConfig {
-    @Bean
+    //@Bean
     public DataSource dataSource() {
         log.info("dataSource 빈 등록");
         HikariDataSource dataSource = new HikariDataSource();
@@ -24,12 +24,12 @@ public class DbConfig {
         dataSource.setPassword("");
         return dataSource;
     }
-    @Bean
+   // @Bean
     public TransactionManager transactionManager() {
         log.info("transactionManager 빈 등록");
         return new JdbcTransactionManager(dataSource());
     }
-    @Bean
+    //@Bean
     public JdbcTemplate jdbcTemplate() {
         log.info("jdbcTemplate 빈 등록");
         return new JdbcTemplate(dataSource());
