@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="memory.MemoryFinderTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2024-10-19T08:25:34" hostname="KAARF" time="0.074">
+  <properties/>
+  <testcase name="get()" classname="memory.MemoryFinderTest" time="0.074"/>
+  <system-out><![CDATA[memory = Memory{used=14811136, max=536870912}
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
