@@ -17,10 +17,10 @@ public class EnvironmentCheck {
     @PostConstruct
     public void init(){
         String url = env.getProperty("url");
-        String username = env.getProperty("username");
+        String Dusername = env.getProperty("Dusername");
         String password = env.getProperty("password");
         log.info("env url={}", url);
-        log.info("env username={}", username);
+        log.info("env username={}", Dusername);
         log.info("env password={}", password);
     }
 }
