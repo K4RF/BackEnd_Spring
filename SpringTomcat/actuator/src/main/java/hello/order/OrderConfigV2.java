@@ -5,7 +5,7 @@ import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
+//@Configuration
 public class OrderConfigV2 {
     @Bean
     OrderService orderService() {
@@ -13,6 +13,7 @@ public class OrderConfigV2 {
 
     }
 
+    @Bean
     public CountedAspect countedAspect(MeterRegistry registry) {
         return new CountedAspect(registry);
     }
